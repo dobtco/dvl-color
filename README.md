@@ -5,6 +5,8 @@ dvl-color
 
 Generate beautiful, accessible color schemes.
 
+[View some examples &rarr;](dobtco.github.io/dvl-color)
+
 ## Usage
 
 #### 1. Install the gem
