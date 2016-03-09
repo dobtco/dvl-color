@@ -21,3 +21,7 @@ generator.to_h # prints a bunch of variables
 ```
 
 [gem]: https://img.shields.io/gem/v/dvl-color.svg
+
+## License
+
+MIT
