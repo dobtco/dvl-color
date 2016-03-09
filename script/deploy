@@ -7,10 +7,14 @@ set -e
   exit 1
 }
 
-init_branch=`git rev-parse --abbrev-ref HEAD`
-git branch -D gh-pages
+# Delete existing gh-pages branch
+if [ `git branch --list gh-pages `]
+then
+  git branch -D gh-pages
+fi
+
 git checkout -b gh-pages
 rake generate_preview
 git commit -am 'deploy preview'
 git push origin gh-pages --force
-git checkout $init_branch
+git checkout master
