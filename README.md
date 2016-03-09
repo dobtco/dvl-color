@@ -1,6 +1,3 @@
-palat
-=======
-
 ![palat logo](https://dobt-captured.s3.amazonaws.com/ajb/palat_logo.png)
 
 [![RubyGem][gem]](http://rubygems.org/gems/palat)
