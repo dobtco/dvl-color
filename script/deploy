@@ -1,0 +1,16 @@
+#! /bin/sh
+
+set -e
+
+(git branch | grep -q '* master') || {
+  echo "Only release from the master branch."
+  exit 1
+}
+
+init_branch=`git rev-parse --abbrev-ref HEAD`
+git branch -D gh-pages
+git checkout -b gh-pages
+rake generate_preview
+git commit -am 'deploy preview'
+git push origin gh-pages --force
+git checkout $init_branch
