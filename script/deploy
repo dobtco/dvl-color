@@ -15,6 +15,7 @@ fi
 
 git checkout -b gh-pages
 rake generate_preview
+git add .
 git commit -am 'deploy preview'
 git push origin gh-pages --force
 git checkout master
