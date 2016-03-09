@@ -1,4 +1,4 @@
-require 'dvl/color'
+require 'palat'
 
 def test_color_array
   %w(

@@ -1,4 +1,4 @@
-class Dvl::Color::FakeRgba
+class Palat::FakeRgba
   def self.calculate(background, foreground, alpha)
     bg = background.rgb
     fg = foreground.rgb

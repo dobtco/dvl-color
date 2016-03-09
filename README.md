@@ -1,26 +1,28 @@
-dvl-color
+palat
 =======
 
-[![RubyGem][gem]](http://rubygems.org/gems/dvl-color)
+![palat logo](https://dobt-captured.s3.amazonaws.com/ajb/palat_logo.png)
+
+[![RubyGem][gem]](http://rubygems.org/gems/palat)
 
 Generate beautiful, accessible color schemes. Used in [Screendoor](https://www.dobt.co/screendoor/) to allow our users to customize their [public-facing forms](https://dobt.forms.fm).
 
-[View some examples &rarr;](dobtco.github.io/dvl-color)
+[View some examples &rarr;](dobtco.github.io/palat)
 
 ## Usage
 
 #### 1. Install the gem
 ```ruby
-gem 'dvl-color'
+gem 'palat'
 ```
 
 #### 2. Generate a color scheme
 ```ruby
-generator = Dvl::Color::Generator.new('#fff') # white background
+generator = Palat::Generator.new('#fff') # white background
 generator.to_h # prints a bunch of variables
 ```
 
-[gem]: https://img.shields.io/gem/v/dvl-color.svg
+[gem]: https://img.shields.io/gem/v/palat.svg
 
 ## License
 

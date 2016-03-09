@@ -1,4 +1,4 @@
-class Dvl::Color::Generator
+class Palat::Generator
   DARK_BACKGROUND_CUTOFF = 120
 
   attr_accessor :background_color,
@@ -203,22 +203,22 @@ class Dvl::Color::Generator
   private
 
   def generate_input_colors
-    input_background = Dvl::Color::FakeRgba.calculate(background_color, white, 0.4)
-    input_background_focus = Dvl::Color::FakeRgba.calculate(background_color, white, 0.7)
+    input_background = Palat::FakeRgba.calculate(background_color, white, 0.4)
+    input_background_focus = Palat::FakeRgba.calculate(background_color, white, 0.7)
     input_color = base_color
 
     if contrast(input_background, input_color) > 6
       [input_background, input_background_focus, input_color]
     else
       alpha = 0.2
-      input_background = Dvl::Color::FakeRgba.calculate(background_color, black, alpha)
-      input_background_focus = Dvl::Color::FakeRgba.calculate(background_color, black, alpha + 0.4)
+      input_background = Palat::FakeRgba.calculate(background_color, black, alpha)
+      input_background_focus = Palat::FakeRgba.calculate(background_color, black, alpha + 0.4)
 
       while contrast(input_background, input_color) < 6
         alpha += 0.01
         break if alpha == 1
-        input_background = Dvl::Color::FakeRgba.calculate(background_color, black, alpha)
-        input_background_focus = Dvl::Color::FakeRgba.calculate(background_color, black, alpha + 0.4)
+        input_background = Palat::FakeRgba.calculate(background_color, black, alpha)
+        input_background_focus = Palat::FakeRgba.calculate(background_color, black, alpha + 0.4)
       end
 
       [input_background, input_background_focus, input_color]

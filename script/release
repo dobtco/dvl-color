@@ -9,8 +9,8 @@ cd $(dirname "$0")/..
 
 # Build a new gem archive.
 
-rm -rf dvl-color-*.gem
-gem build -q dvl-color.gemspec
+rm -rf palat-*.gem
+gem build -q palat.gemspec
 
 # Make sure we're on the master branch.
 
@@ -21,7 +21,7 @@ gem build -q dvl-color.gemspec
 
 # Figure out what version we're releasing.
 
-tag=v`ls dvl-color-*.gem | sed 's/^dvl-color-\(.*\)\.gem$/\1/'`
+tag=v`ls palat-*.gem | sed 's/^palat-\(.*\)\.gem$/\1/'`
 
 # Make sure we haven't released this version before.
 
@@ -34,5 +34,5 @@ git fetch -t origin
 
 # Tag it and bag it.
 
-gem push dvl-color-*.gem && git tag "$tag" &&
+gem push palat-*.gem && git tag "$tag" &&
   git push origin master && git push origin "$tag"

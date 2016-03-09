@@ -1,5 +1,5 @@
 require 'bundler/setup'
-require 'dvl/color'
+require 'palat'
 require_relative './spec/spec_helper'
 
 task :generate_preview do
@@ -86,7 +86,7 @@ task :generate_preview do
     end
 
     def render_section(color)
-      generator = Dvl::Color::Generator.new(color)
+      generator = Palat::Generator.new(color)
 
       div(class: 'color_test_section', style: "background-color: #{generator.background_color.to_hex}") {
         h2('Header', style: "color: #{generator.base_color.to_hex}")

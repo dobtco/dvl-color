@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Dvl::Color::Generator do
+describe Palat::Generator do
   expected_output = <<-RESULT
 f7f7f7: $backgroundColor:#f7f7f7;$baseColor:#3d3d3d;$errorColor:#ff6a6a;$errorBubbleBackground:#ff6a6a;$errorBubbleColor:#ffffff;$inputBackground:#fafafa;$inputBackgroundFocus:#fdfdfd;$inputColor:#3d3d3d;$dropdownBackground:#f7f7f7;$dropdownColor:#3d3d3d;
 c4c4c4: $backgroundColor:#c4c4c4;$baseColor:#353535;$errorColor:#ef0000;$errorBubbleBackground:#ef0000;$errorBubbleColor:#ffffff;$inputBackground:#dcdcdc;$inputBackgroundFocus:#ededed;$inputColor:#353535;$dropdownBackground:#c4c4c4;$dropdownColor:#353535;
