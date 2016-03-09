@@ -3,7 +3,7 @@ dvl-color
 
 [![RubyGem][gem]](http://rubygems.org/gems/dvl-color)
 
-Generate beautiful, accessible color schemes.
+Generate beautiful, accessible color schemes. Used in [Screendoor](https://www.dobt.co/screendoor/) to allow our users to customize their [public-facing forms](https://dobt.forms.fm).
 
 [View some examples &rarr;](dobtco.github.io/dvl-color)
 
