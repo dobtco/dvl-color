@@ -3,7 +3,7 @@ dvl-color
 
 [![RubyGem][gem]](http://rubygems.org/gems/dvl-color)
 
-Add random, unique "pretty" ids to your ActiveRecord models.
+Generate beautiful, accessible color schemes.
 
 ## Usage
 
@@ -15,7 +15,7 @@ gem 'dvl-color'
 #### 2. Generate a color scheme
 ```ruby
 generator = Dvl::Color::Generator.new('#fff') # white background
-generator.to_h
+generator.to_h # prints a bunch of variables
 ```
 
 [gem]: https://img.shields.io/gem/v/dvl-color.svg
