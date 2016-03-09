@@ -1,29 +1,6 @@
 require 'spec_helper'
 
 describe Dvl::Color::Generator do
-  input_array = %w(
-    f7f7f7
-    c4c4c4
-    949494
-    6e6e6e
-    444444
-    47141D
-    333022
-    073329
-    072333
-    2E0D33
-    D12A6D
-    FF7F4C
-    1BC7A2
-    37A6E6
-    AF45BF
-    FFF7F5
-    FCF9F2
-    F8FFF5
-    F5FDFF
-    F7E6FF
-  )
-
   expected_output = <<-RESULT
 f7f7f7: $backgroundColor:#f7f7f7;$baseColor:#3d3d3d;$errorColor:#ff6a6a;$errorBubbleBackground:#ff6a6a;$errorBubbleColor:#ffffff;$inputBackground:#fafafa;$inputBackgroundFocus:#fdfdfd;$inputColor:#3d3d3d;$dropdownBackground:#f7f7f7;$dropdownColor:#3d3d3d;
 c4c4c4: $backgroundColor:#c4c4c4;$baseColor:#353535;$errorColor:#ef0000;$errorBubbleBackground:#ef0000;$errorBubbleColor:#ffffff;$inputBackground:#dcdcdc;$inputBackgroundFocus:#ededed;$inputColor:#353535;$dropdownBackground:#c4c4c4;$dropdownColor:#353535;
@@ -48,7 +25,7 @@ F7E6FF: $backgroundColor:#f7e6ff;$baseColor:#433649;$errorColor:#ff1a29;$errorBu
   RESULT
 
   it 'calculates properly' do
-    calculations = input_array.map do |x|
+    calculations = test_color_array.map do |x|
       "#{x}: #{described_class.new(x).to_scss}"
     end.join("\n")
 
