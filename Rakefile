@@ -99,8 +99,8 @@ task :generate_preview do
             }
 
             .keycode.is_pressed strong {
-              -webkit-animation: press 0.2s cubic-bezier(0.455, 0.03, 0.515, 0.955);
-              animation: press 0.2s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+              -webkit-animation: press 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+              animation: press 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955);
             }
 
             .keycode span {
@@ -236,13 +236,17 @@ task :generate_preview do
                 margin: 2%;
               }
             }
+
             @media screen and (min-width: 1200px) {
+              .color_test_section_wrapper {
+                width: 22%;
+                margin: 1.5%;
+              }
+            }
+
+            @media screen and (min-width: 1800px) {
               body {
                 font-size: 150%;
-              }
-              .color_test_section_wrapper {
-                width: 22.5%;
-                margin: 2.5%;
               }
             }
           }.squish.html_safe
