@@ -66,9 +66,9 @@ task :generate_preview do
               text-align: center;
               background: rgba(255,255,255,0.05);
               border: 1px solid #fff;
-              box-shadow: 0 0.25em 0 rgba(255,255,255,0.9);
+              box-shadow: 0 0.125em 0 rgba(255,255,255,0.9);
               border-radius: 0.25em;
-              margin-bottom: 0.75em;
+              margin-bottom: 0.5em;
             }
 
             .keycode span {
@@ -177,7 +177,8 @@ task :generate_preview do
               margin-top: 1.5rem;
               font-size: 0.75rem;
               padding: 1rem;
-              height: 30rem;
+              height: 40em;
+              border-radius: 4px;
             }
 
             .debug strong {
