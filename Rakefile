@@ -22,8 +22,18 @@ task :generate_preview do
           link(rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Monda:400,700')
           script %{
             $(document).on('keydown', function(e){
-              if (e.keyCode == 192) $('.debug').toggle();
-              if (e.keyCode == 70) $('.input').toggle();
+              if (e.keyCode == 192) {
+                $('.debug').toggle();
+                $('.keycode_tilde').addClass('is_pressed').on('animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', function() {
+                  $('.keycode_tilde').removeClass('is_pressed');
+                });
+              }
+              if (e.keyCode == 70) {
+                $('.input').toggle();
+                $('.keycode_f').addClass('is_pressed').on('animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', function() {
+                  $('.keycode_f').removeClass('is_pressed');
+                });
+              }
             });
           }.html_safe
 
@@ -37,10 +47,27 @@ task :generate_preview do
               -webkit-font-smoothing: antialiased;
               -moz-osx-font-smoothing: grayscale;
               background-color: #200457;
+              background-image: -webkit-radial-gradient(top left farthest-corner, rgba(217,59,46,0.5) 0%, rgba(217,59,46,0) 90%),
+                    -webkit-radial-gradient(top right farthest-corner, rgba(46,68,217,0.4) 0%, rgba(46,68,217,0) 85%),
+                    -webkit-linear-gradient(rgba(32,4,87,0),rgb(32,4,87) 500px);
               background-image: radial-gradient(farthest-corner at top left, rgba(217,59,46,0.5) 0%, rgba(217,59,46,0) 90%),
                     radial-gradient(farthest-corner at top right, rgba(46,68,217,0.4) 0%, rgba(46,68,217,0) 85%),
                     linear-gradient(rgba(32,4,87,0),rgb(32,4,87) 500px);
 
+            }
+
+            @-webkit-keyframes press {
+              from {
+                background-color: rgba(255,255,255,0.8);
+                color: rgba(0,0,0,0.5);
+              }
+            }
+
+            @keyframes press {
+              from {
+                background-color: rgba(255,255,255,0.8);
+                color: rgba(0,0,0,0.5);
+              }
             }
 
             .keycodes_wrapper {
@@ -69,6 +96,11 @@ task :generate_preview do
               box-shadow: 0 0.125em 0 rgba(255,255,255,0.9);
               border-radius: 0.25em;
               margin-bottom: 0.5em;
+            }
+
+            .keycode.is_pressed strong {
+              -webkit-animation: press 0.2s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+              animation: press 0.2s cubic-bezier(0.455, 0.03, 0.515, 0.955);
             }
 
             .keycode span {
@@ -134,10 +166,14 @@ task :generate_preview do
               margin: 1em 0;
               border-radius: 4px;
               box-shadow: inset 0 0 0 1px rgba(0,0,0,0.15);
+              transition: -ms-transform 500ms cubic-bezier(0.23, 1, 0.32, 1);
+              transition: -webkit-transform 500ms cubic-bezier(0.23, 1, 0.32, 1);
               transition: transform 500ms cubic-bezier(0.23, 1, 0.32, 1);
             }
 
             .color_test_section_wrapper:hover {
+              -ms-transform: scale(1.03);
+              -webkit-transform: scale(1.03);
               transform: scale(1.03);
             }
 
@@ -228,14 +264,14 @@ task :generate_preview do
           }
 
           div(class: 'keycodes_wrapper') {
-            div(class: 'keycode keycode-tilde') {
+            div(class: 'keycode keycode_tilde') {
               strong '~'
               span 'Toggle variables'
             }
 
-            div(class: 'keycode') {
+            div(class: 'keycode keycode_f') {
               strong 'f'
-              span 'Toggle focused state'
+              span 'Toggle error state'
             }
           }
 
