@@ -15,28 +15,14 @@ task :generate_preview do
     def content
       rawtext "<!doctype html>"
 
-      html {
+      html(lang: 'en') {
         head {
           title 'Palat'
-          script(src: 'https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
+          meta(name: 'description', content: 'A Ruby gem that generates beautiful, accessible color schemes.')
+          meta(name: 'viewport', content: 'width=device-width')
+          meta('http-equiv': 'X-UA-Compatible', content: 'IE=edge')
+          meta('charset': 'utf-8')
           link(rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Monda:400,700')
-          script %{
-            $(document).on('keydown', function(e){
-              if (e.keyCode == 192) {
-                $('.debug').toggle();
-                $('.keycode_tilde').addClass('is_pressed').on('animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', function() {
-                  $('.keycode_tilde').removeClass('is_pressed');
-                });
-              }
-              if (e.keyCode == 70) {
-                $('.input').toggle();
-                $('.keycode_f').addClass('is_pressed').on('animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', function() {
-                  $('.keycode_f').removeClass('is_pressed');
-                });
-              }
-            });
-          }.html_safe
-
           style %{
             body {
               margin: 1em 5%;
@@ -288,6 +274,24 @@ task :generate_preview do
             p { a 'Fork Palat on Github', href: 'http://www.github.com/dobtco/palat/' }
           }
         }
+
+        script(src: 'https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
+        script %{
+          $(document).on('keydown', function(e){
+            if (e.keyCode == 192) {
+              $('.debug').toggle();
+              $('.keycode_tilde').addClass('is_pressed').on('animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', function() {
+                $('.keycode_tilde').removeClass('is_pressed');
+              });
+            }
+            if (e.keyCode == 70) {
+              $('.input').toggle();
+              $('.keycode_f').addClass('is_pressed').on('animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', function() {
+                $('.keycode_f').removeClass('is_pressed');
+              });
+            }
+          });
+        }.html_safe
       }
     end
 
