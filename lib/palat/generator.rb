@@ -46,20 +46,27 @@ class Palat::Generator
   def to_debug_s
     str = []
 
+    str << "<strong>Colors</strong>"
+
     to_h.each do |k, v|
-      str << "#{k}: #{v}"
+      str << "#{k}: <code>#{v}</code>"
     end
 
-    str << "Background brightness: #{background_color.brightness}"
+    str << "Background brightness: <code>#{background_color.brightness}</code>"
 
-    str << "Ratio: #{contrast(background_color, base_color).round(2)}"
-    str << "Error Ratio: #{contrast(background_color, error_color).round(2)}"
-    str << "Error Bubble Ratio: #{contrast(error_bubble_background, error_bubble_color).round(2)}"
-    str << "Input ratio: #{contrast(input_background, input_color).round(2)}"
-    str << "Error satur: #{error_color.hsl.s.round(2)}"
-    str << "Conservative light: #{conservative_background_light?}"
-    str << "Conservative dark: #{conservative_background_dark?}"
+    str << "<strong>Contrast Ratios</strong>"
+    str << "BG / Text: <code>#{contrast(background_color, base_color).round(2)}</code>"
+    str << "BG / Error BG: <code>#{contrast(background_color, error_color).round(2)}</code>"
+    str << "Error BG / Text: <code>#{contrast(error_bubble_background, error_bubble_color).round(2)}</code>"
+    str << "Input BG / Text: <code>#{contrast(input_background, input_color).round(2)}</code>"
 
+    str << "<strong>Saturation</strong>"
+    str << "Error: <code>#{error_color.hsl.s.round(2) * 100} saturation</code>"
+    if conservative_background_light?
+      str << "Background: conservative light"
+    elsif conservative_background_dark?
+      str << "Background: conservative dark"
+    end
     str.join("<br>")
   end
 

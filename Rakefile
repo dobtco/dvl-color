@@ -17,8 +17,9 @@ task :generate_preview do
 
       html {
         head {
-          title 'Color Test'
+          title 'Palat'
           script(src: 'https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
+          link(rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Monda:400,700')
           script %{
             $(document).on('keydown', function(e){
               if (e.keyCode == 192) $('.debug').toggle();
@@ -28,31 +29,96 @@ task :generate_preview do
 
           style %{
             body {
-              margin: 0;
-              font-size: 1.125rem;
-              line-height: 2rem;
-              font-family: sans-serif;
-              font-weight: 400;
+              margin: 1em 5%;
+              font-size: 100%;
+              line-height: 1.5;
+              font-family: 'Monda', 'HelveticaNeue', sans-serif;
+              font-weight: normal;
               -webkit-font-smoothing: antialiased;
               -moz-osx-font-smoothing: grayscale;
+              background-color: #200457;
+              background-image: radial-gradient(farthest-corner at top left, rgba(217,59,46,0.5) 0%, rgba(217,59,46,0) 90%),
+                    radial-gradient(farthest-corner at top right, rgba(46,68,217,0.4) 0%, rgba(46,68,217,0) 85%),
+                    linear-gradient(rgba(32,4,87,0),rgb(32,4,87) 500px);
+
             }
 
             h2 {
-              margin: 5px 0;
-              font-size: 4.29rem;
+              margin: 0 0 1.5rem;
+              font-size: 3rem;
               line-height: 5rem;
-              font-family: serif;
-              font-weight: 100;
+              font-weight: bold;
+              text-align: center;
+            }
+
+            .label {
+              margin-bottom: 0.5rem;
+            }
+
+            code {
+              font-family: monospace;
+              font-size: 1.25em;
             }
 
             * {
               box-sizing: border-box;
             }
 
+            .logo img {
+              display: block;
+              max-width: 50%;
+              margin: 0 auto;
+            }
+
+            .header {
+              padding: 2rem 0;
+            }
+
+            .header p,
+            .footer {
+              color: #fff;
+              max-width: 40rem;
+              margin: 2.5em auto 1.5em;
+              text-align: center;
+              margin-bottom: 1.5em;
+            }
+
+            .footer {
+              font-size: 0.75em;
+              clear: left;
+              display: table;
+            }
+
+            .footer a,
+            .footer a:hover,
+            .footer a:focus,
+            .footer a:active {
+              color: #fff;
+            }
+
+            .color_test_section_wrapper {
+              margin: 1em 0;
+              border-radius: 4px;
+              box-shadow: inset 0 0 0 1px rgba(0,0,0,0.15);
+              transition: transform 500ms cubic-bezier(0.23, 1, 0.32, 1);
+            }
+
+            .color_test_section_wrapper:hover {
+              transform: scale(1.03);
+            }
+
             .color_test_section {
-              width: 25%;
-              padding: 25px;
-              display: inline-block;
+              padding: 2em;
+            }
+
+            .color_test_swatch {
+              background: rgba(255,255,255,0.6);
+              padding: 0.25em 2em;
+              font-size: 0.875em;
+              border-top-left-radius: 4px;
+              border-top-right-radius: 4px;
+              text-align: center;
+              margin: 1px;
             }
 
             .input {
@@ -62,6 +128,9 @@ task :generate_preview do
               border-radius: 4px;
               border-style: solid;
               border-width: 1px;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
             }
 
             .error_bubble {
@@ -71,16 +140,65 @@ task :generate_preview do
             }
 
             .debug {
-              margin-top: 10px;
-              font-size: 13px;
+              margin-top: 1.5rem;
+              font-size: 0.75rem;
+              padding: 1rem;
+              height: 30rem;
+            }
+
+            .debug strong {
+              margin-top: 1rem;
+              display: block;
+            }
+
+            .debug strong:first-of-type {
+              margin: 0;
+            }
+
+            @media screen and (min-width: 640px) {
+              body {
+                font-size: 125%;
+              }
+              .color_test_section_wrapper {
+                float: left;
+                width: 46%;
+                margin: 2%;
+              }
+            }
+            @media screen and (min-width: 1200px) {
+              body {
+                font-size: 150%;
+              }
+              .color_test_section_wrapper {
+                width: 22.5%;
+                margin: 2.5%;
+              }
             }
           }.squish.html_safe
         }
 
         body {
+
+          div(class: 'header') {
+            a(href: 'http://github.com/dobtco/palat',
+              title: 'Fork Palat on Github',
+              class: 'logo') {
+              img(src: 'http://i.imgur.com/4JfuQgs.png',
+                  alt: 'Palat')
+            }
+
+            p 'A Ruby gem that generates beautiful, accessible color schemes from a single background&nbsp;color.'.html_safe
+
+            p 'Designed to meet WCAG 2.0 Level AA contrast ratio guidelines.'
+          }
           test_color_array.each do |color|
             render_section(color)
           end
+
+          div(class: 'footer') {
+            p "Made by <a href='http://dobt.co'>The Department of Better Technology.</a>".html_safe
+            p { a 'Fork Palat on Github', href: 'http://www.github.com/dobtco/palat/' }
+          }
         }
       }
     end
@@ -88,35 +206,44 @@ task :generate_preview do
     def render_section(color)
       generator = Palat::Generator.new(color)
 
-      div(class: 'color_test_section', style: "background-color: #{generator.background_color.to_hex}") {
-        h2('Header', style: "color: #{generator.base_color.to_hex}")
-        label {
-          span 'Text ', style: "color: #{generator.base_color.to_hex}"
-          abbr '*', style: "color: #{generator.error_color.to_hex}"
-        }
-        div(
-          'This is my input', class: 'input',
-          style: "border-color: rgba(#{generator.base_color.to_hex},0.6);
-                  background-color: #{generator.input_background.to_hex};
-                  color: #{generator.input_color.to_hex};"
-        )
-        div(
-          'This is my input', class: 'input error_input error_input_focus',
-          style: "display: none;
-                  border-color: #{generator.error_color.to_hex};
-                  background-color: #{generator.input_background_focus.to_hex};
-                  color: #{generator.input_color.to_hex};"
-        )
-        div(
-          'Error!', class: 'error_bubble',
-          style: "background-color: #{generator.error_bubble_background.to_hex};
-                  color: #{generator.error_bubble_color.to_hex};"
-        )
+      div(class: 'color_test_section_wrapper', style: "background-color: #{generator.background_color.to_hex}") {
 
-        div(
-          generator.to_debug_s.html_safe, class: 'debug',
-          style: "color: #{generator.base_color.to_hex}; display: none;"
-        )
+        div(class: 'color_test_swatch') {
+          code generator.background_color.to_hex
+        }
+
+        div(class: 'color_test_section') {
+          h2('Header', style: "color: #{generator.base_color.to_hex}")
+          div(class: 'label') {
+            span 'Label ', style: "color: #{generator.base_color.to_hex}"
+            abbr '*', style: "color: #{generator.error_color.to_hex}"
+          }
+          div(
+            'This is my input', class: 'input',
+            style: "border-color: rgba(#{generator.base_color.to_hex},0.6);
+                    background-color: #{generator.input_background.to_hex};
+                    color: #{generator.input_color.to_hex};"
+          )
+          div(
+            'This is my input', class: 'input error_input error_input_focus',
+            style: "display: none;
+                    border-color: #{generator.error_color.to_hex};
+                    background-color: #{generator.input_background_focus.to_hex};
+                    color: #{generator.input_color.to_hex};"
+          )
+          div(
+            'Error!', class: 'error_bubble',
+            style: "background-color: #{generator.error_bubble_background.to_hex};
+                    color: #{generator.error_bubble_color.to_hex};"
+          )
+
+          div(
+            generator.to_debug_s.html_safe, class: 'debug',
+            style: "display: none;
+                    color: #{generator.base_color.to_hex};
+                    background-color: #{generator.input_background.to_hex}"
+          )
+        }
       }
     end
   end
