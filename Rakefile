@@ -43,6 +43,40 @@ task :generate_preview do
 
             }
 
+            .keycodes_wrapper {
+              margin: 0 auto 1.5em;
+              font-size: 2em;
+              color: #fff;
+              text-align: center;
+              mix-blend-mode: overlay;
+            }
+
+            .keycode {
+              display: inline-block;
+              margin: 0 0.75em;
+            }
+
+            .keycode strong {
+              font-weight: normal;
+              display: inline-block;
+              width: 4rem;
+              height: 4rem;
+              line-height: 1.5rem;
+              padding: 1.25rem 0;
+              text-align: center;
+              background: rgba(255,255,255,0.05);
+              border: 1px solid #fff;
+              box-shadow: 0 0.25em 0 rgba(255,255,255,0.9);
+              border-radius: 0.25em;
+              margin-bottom: 0.75em;
+            }
+
+            .keycode span {
+              font-size: 0.875rem;
+              opacity: 0.9;
+              display: block;
+            }
+
             h2 {
               margin: 0 0 1.5rem;
               font-size: 3rem;
@@ -191,6 +225,19 @@ task :generate_preview do
 
             p 'Designed to meet WCAG 2.0 Level AA contrast ratio guidelines.'
           }
+
+          div(class: 'keycodes_wrapper') {
+            div(class: 'keycode keycode-tilde') {
+              strong '~'
+              span 'Toggle variables'
+            }
+
+            div(class: 'keycode') {
+              strong 'f'
+              span 'Toggle focused state'
+            }
+          }
+
           test_color_array.each do |color|
             render_section(color)
           end
