@@ -8,4 +8,5 @@ deployment:
     commands:
       - git config --global user.email "ops@dobt.co"
       - git config --global user.name "CircleCI"
+      - gem install rake
       - script/deploy
