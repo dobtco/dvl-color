@@ -212,7 +212,7 @@ task :generate_preview do
               margin: 0;
             }
 
-            @media screen and (min-width: 640px) {
+            @media screen and (min-width: 850px) {
               body {
                 font-size: 125%;
               }
@@ -223,7 +223,7 @@ task :generate_preview do
               }
             }
 
-            @media screen and (min-width: 1200px) {
+            @media screen and (min-width: 1600px) {
               .color_test_section_wrapper {
                 width: 22%;
                 margin: 1.5%;
@@ -241,10 +241,10 @@ task :generate_preview do
         body {
 
           div(class: 'header') {
-            a(href: 'http://github.com/dobtco/palat',
+            a(href: 'https://github.com/dobtco/palat',
               title: 'Fork Palat on Github',
               class: 'logo') {
-              img(src: 'http://i.imgur.com/4JfuQgs.png',
+              img(src: 'logo.png',
                   alt: 'Palat')
             }
 
@@ -259,8 +259,8 @@ task :generate_preview do
               span 'Toggle variables'
             }
 
-            div(class: 'keycode keycode_f') {
-              strong 'f'
+            div(class: 'keycode keycode_e') {
+              strong 'e'
               span 'Toggle error state'
             }
           }
@@ -270,8 +270,8 @@ task :generate_preview do
           end
 
           div(class: 'footer') {
-            p "Made by <a href='http://dobt.co'>The Department of Better Technology.</a>".html_safe
-            p { a 'Fork Palat on Github', href: 'http://www.github.com/dobtco/palat/' }
+            p "Made by <a href='https://dobt.co'>The Department of Better Technology.</a>".html_safe
+            p { a 'Fork Palat on Github', href: 'https://www.github.com/dobtco/palat/' }
           }
         }
 
@@ -284,10 +284,10 @@ task :generate_preview do
                 $('.keycode_tilde').removeClass('is_pressed');
               });
             }
-            if (e.keyCode == 70) {
+            if (e.keyCode == 69) {
               $('.input').toggle();
-              $('.keycode_f').addClass('is_pressed').on('animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', function() {
-                $('.keycode_f').removeClass('is_pressed');
+              $('.keycode_e').addClass('is_pressed').on('animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', function() {
+                $('.keycode_e').removeClass('is_pressed');
               });
             }
           });
