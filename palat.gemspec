@@ -23,5 +23,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'chroma_wcag_contrast', '~> 0.0.1'
 
   s.add_development_dependency 'fortitude'
+  s.add_development_dependency 'rake'
   s.add_development_dependency 'rspec'
 end
