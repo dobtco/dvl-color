@@ -270,7 +270,7 @@ task :generate_preview do
           end
 
           div(class: 'footer') {
-            p "Made by <a href='https://dobt.co'>The Department of Better Technology.</a>".html_safe
+            p "Made by <a href='https://www.dobt.co'>The Department of Better Technology.</a>".html_safe
             p { a 'Fork Palat on Github', href: 'https://www.github.com/dobtco/palat/' }
           }
         }
