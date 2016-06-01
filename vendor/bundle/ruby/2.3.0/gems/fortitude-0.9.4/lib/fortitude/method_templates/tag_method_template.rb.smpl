@@ -1,0 +1,93 @@
+def #{method_name}(content_or_attributes = nil, attributes = nil)
+  o = @_fortitude_output_buffer_holder.output_buffer
+  rc = @_fortitude_rendering_context                                       # :if record_emitting_tag || needs_formatting
+
+  this_tag = #{tag_object_const}                                           # :if record_emitting_tag || needs_attribute_rules || needs_id_uniqueness
+  rc.emitting_tag!(self, this_tag, content_or_attributes, attributes) do   # :if record_emitting_tag
+    format_output = rc.format_output?                                      # :if needs_formatting
+    if format_output                                                       # :if needs_formatting
+      rc.needs_newline!                                                    # :if needs_formatting && newline_before
+      rc.about_to_output_non_whitespace!                                   # :if needs_formatting
+    end                                                                    # :if needs_formatting
+
+    if (! content_or_attributes)
+      if attributes
+        content_or_attributes, attributes = attributes, nil
+      else
+        if block_given?
+          _fortitude_raise_no_content_allowed_error(#{tag_object_const})     # :if ! content_allowed
+          o.#{concat_method}(#{open_const})
+          begin
+            #{yield_call}
+            o = @_fortitude_output_buffer_holder.output_buffer
+          ensure
+            o.#{concat_method}(#{close_const})
+          end
+        else
+          o.#{concat_method}(#{alone_const})
+        end
+
+        return FORTITUDE_NO_RETURN_VALUE_FROM_TAGS
+      end
+    end
+
+    if content_or_attributes.kind_of?(Hash)
+      this_tag.validate_attributes(self, content_or_attributes)            # :if needs_attribute_rules
+      this_tag.validate_id_uniqueness(self, content_or_attributes)         # :if needs_id_uniqueness
+      o.#{concat_method}(#{partial_open_const})
+      content_or_attributes.fortitude_append_as_attributes(o, nil, #{allows_bare_attributes})
+
+      if block_given?
+        _fortitude_raise_no_content_allowed_error(#{tag_object_const})     # :if ! content_allowed
+        o.#{concat_method}(#{partial_open_end_const})
+        begin
+          #{yield_call}
+        ensure
+          o = @_fortitude_output_buffer_holder.output_buffer
+          o.#{concat_method}(#{close_const})
+        end
+      else
+        o.#{concat_method}(#{partial_open_alone_end_const})
+      end
+    elsif (! attributes)
+      _fortitude_raise_no_content_allowed_error(#{tag_object_const})       # :if ! content_allowed
+      o.#{concat_method}(#{open_const})
+      rc.emitting_tag!(self, FORTITUDE_TEXT_PSEUDOTAG, content_or_attributes, nil) { } unless content_or_attributes.instance_variable_get('@html_safe') # :if record_emitting_tag
+      content_or_attributes.to_s.fortitude_append_escaped_string(o)        # :if escape_direct_content
+      o.#{concat_method}(content_or_attributes.to_s)                       # :if ! escape_direct_content
+
+      begin
+        if block_given?
+          _fortitude_raise_no_content_allowed_error(#{tag_object_const})     # :if ! content_allowed
+          #{yield_call}
+        end
+      ensure
+        o = @_fortitude_output_buffer_holder.output_buffer
+        o.#{concat_method}(#{close_const})
+      end
+    else
+      _fortitude_raise_no_content_allowed_error(#{tag_object_const})       # :if ! content_allowed
+      this_tag.validate_attributes(self, attributes)                       # :if needs_attribute_rules
+      this_tag.validate_id_uniqueness(self, attributes)                    # :if needs_id_uniqueness
+      o.#{concat_method}(#{partial_open_const})
+      attributes.fortitude_append_as_attributes(o, nil, #{allows_bare_attributes})
+      o.#{concat_method}(#{partial_open_end_const})
+
+      rc.emitting_tag!(self, FORTITUDE_TEXT_PSEUDOTAG, content_or_attributes, nil) { } unless content_or_attributes.instance_variable_get('@html_safe') # :if record_emitting_tag
+      content_or_attributes.to_s.fortitude_append_escaped_string(o)        # :if escape_direct_content
+      o.#{concat_method}(content_or_attributes.to_s)                       # :if ! escape_direct_content
+      begin
+        if block_given?
+          _fortitude_raise_no_content_allowed_error(#{tag_object_const})     # :if ! content_allowed
+          #{yield_call}
+        end
+      ensure
+        o = @_fortitude_output_buffer_holder.output_buffer
+        o.#{concat_method}(#{close_const})
+      end
+    end
+    rc.needs_newline! if format_output                                     # :if needs_formatting && newline_before
+  end                                                                      # :if record_emitting_tag
+
+  FORTITUDE_NO_RETURN_VALUE_FROM_TAGS
+end

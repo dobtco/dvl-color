@@ -1,0 +1,19 @@
+current directory: /home/ubuntu/palat/vendor/bundle/ruby/2.3.0/gems/fortitude-0.9.4/ext/fortitude_native_ext
+/home/ubuntu/.rvm/rubies/ruby-2.3.0/bin/ruby -r ./siteconf20160601-9540-xb4ecy.rb extconf.rb
+creating Makefile
+
+current directory: /home/ubuntu/palat/vendor/bundle/ruby/2.3.0/gems/fortitude-0.9.4/ext/fortitude_native_ext
+make "DESTDIR=" clean
+
+current directory: /home/ubuntu/palat/vendor/bundle/ruby/2.3.0/gems/fortitude-0.9.4/ext/fortitude_native_ext
+make "DESTDIR="
+compiling fortitude_native_ext.c
+fortitude_native_ext.c: In function ‘fortitude_append_key_and_value’:
+fortitude_native_ext.c:163:8: warning: variable ‘to_s’ set but not used [-Wunused-but-set-variable]
+     ID to_s;
+        ^
+linking shared-object fortitude_native_ext.so
+
+current directory: /home/ubuntu/palat/vendor/bundle/ruby/2.3.0/gems/fortitude-0.9.4/ext/fortitude_native_ext
+make "DESTDIR=" install
+/usr/bin/install -m 0755 fortitude_native_ext.so ./.gem.20160601-9540-1powq1k

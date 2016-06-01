@@ -1,0 +1,21 @@
+en:
+  house: "house"
+  awesome: "not awesome"
+  localization_system_spec:
+    dot_notation:
+      awesome: "awesome!"
+    native_support:
+      awesome: "also awesome %{number}!"
+    readjust_base:
+      awesome: "we should not be using this, %{number}!"
+    explicit_html:
+      one_html: foo<bar>
+      two:
+        html: bar<baz>
+  some:
+    other:
+      base:
+        awesome: "SUPA-awesome %{number}!"
+  one_html: foo<bar>
+  two:
+    html: bar<baz>
