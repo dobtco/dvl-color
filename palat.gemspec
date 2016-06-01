@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
 
   s.homepage = 'http://github.com/dobtco/palat'
 
-  s.add_dependency 'chroma', '~> 0.0.1'
+  s.add_dependency 'chroma', '>= 0.0.1', '< 0.2'
   s.add_dependency 'chroma_wcag_contrast', '~> 0.0.1'
 
   s.add_development_dependency 'fortitude'
